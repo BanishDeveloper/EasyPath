@@ -7,7 +7,7 @@ local function getClosest(sPos,objs,maxDist) -- starting position (sPos) is a Ve
 		else
 		dist = maxDist
 	end
-	for _, o in pairs(objs:GetChildren())do -- gets all objects
+	for _, o in pairs(objs)do -- gets all objects
 		if (sPos - o.Position).Magnitude > dist then
 			dist = (sPos - o.Position).Magitude
 			closestObj = o	
@@ -41,4 +41,4 @@ pathfindingModule.createPath = function(pos1, pos2) -- note the positions are Ve
 	return point -- returns it as a variable
 end
 
-return pathfindingModule 
+return pathfindingModule
