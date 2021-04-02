@@ -20,13 +20,30 @@ end
 local pathfindingService = game:GetService("PathfindingService")
 
 
-pathfindingModule.getClosestObject = function(pos,objects,distance,getObjectFunction)
-	if objects ~= nil then
-		local closest = getClosest(pos, objects, distance)
-		if closest then
-			getObjectFunction()
-		end
+	getClosestObject = function(objs ,position, lowest)
+		local object = nil
+		for _, o in pairs(objs:GetChildren())do
+			if o:IsA("BasePart") then
+					local distance = (o.Position - position).Magnitude
+					if distance < lowest then
+					lowest = distance
+					object = o
+					elseif o:IsA("Model") then
+					if o.PrimaryPart then
+					local distance = (o.PrimaryPart.Position - position).Magnitude
+					if distance < lowest then
+					lowest = distance
+					object = o
+					else
+					local distance = (o[name].Position - position).Magnitude
+					if distance < lowest then
+					lowest = distance
+					object = o
+				end
+			end
+		end	
 	end
+	return object
 end
 
 pathfindingModule.createPath = function(pos1, pos2) -- note the positions are Vector3 values
